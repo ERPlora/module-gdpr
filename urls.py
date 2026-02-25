@@ -7,6 +7,11 @@ urlpatterns = [
     # Dashboard
     path('', views.dashboard, name='dashboard'),
 
+    # Navigation tab aliases
+    path('consents/', views.consent_records_list, name='consents'),
+    path('requests/', views.dashboard, name='requests'),
+
+
     # ConsentRecord
     path('consent_records/', views.consent_records_list, name='consent_records_list'),
     path('consent_records/add/', views.consent_record_add, name='consent_record_add'),
