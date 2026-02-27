@@ -11,39 +11,39 @@
                         <span class="checkbox-mark"></span>
                     </label>
                 </th>
-                <th class="datatable-th datatable-th-sortable{% if sort_field == 'consented' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
+                <th class="cursor-pointer datatable-th datatable-th-sortable{% if sort_field == 'consented' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
                     hx-get="{% url 'gdpr:consent_records_list' %}?sort=consented&dir={% if sort_field == 'consented' and sort_dir == 'asc' %}desc{% else %}asc{% endif %}"
-                    hx-target="#datatable-body" hx-include="#consent_records-datatable" style="cursor: pointer;">
+                    hx-target="#datatable-body" hx-include="#consent_records-datatable">
                     {% trans "Consented" %}
                     <span class="datatable-sort-icon">{% icon "chevron-up-outline" %}</span>
                 </th>
-                <th class="datatable-th datatable-th-sortable{% if sort_field == 'subject_name' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
+                <th class="cursor-pointer datatable-th datatable-th-sortable{% if sort_field == 'subject_name' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
                     hx-get="{% url 'gdpr:consent_records_list' %}?sort=subject_name&dir={% if sort_field == 'subject_name' and sort_dir == 'asc' %}desc{% else %}asc{% endif %}"
-                    hx-target="#datatable-body" hx-include="#consent_records-datatable" style="cursor: pointer;">
+                    hx-target="#datatable-body" hx-include="#consent_records-datatable">
                     {% trans "Subject Name" %}
                     <span class="datatable-sort-icon">{% icon "chevron-up-outline" %}</span>
                 </th>
-                <th class="datatable-th datatable-th-sortable{% if sort_field == 'subject_email' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
+                <th class="cursor-pointer datatable-th datatable-th-sortable{% if sort_field == 'subject_email' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
                     hx-get="{% url 'gdpr:consent_records_list' %}?sort=subject_email&dir={% if sort_field == 'subject_email' and sort_dir == 'asc' %}desc{% else %}asc{% endif %}"
-                    hx-target="#datatable-body" hx-include="#consent_records-datatable" style="cursor: pointer;">
+                    hx-target="#datatable-body" hx-include="#consent_records-datatable">
                     {% trans "Subject Email" %}
                     <span class="datatable-sort-icon">{% icon "chevron-up-outline" %}</span>
                 </th>
-                <th class="datatable-th datatable-th-sortable{% if sort_field == 'purpose' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
+                <th class="cursor-pointer datatable-th datatable-th-sortable{% if sort_field == 'purpose' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
                     hx-get="{% url 'gdpr:consent_records_list' %}?sort=purpose&dir={% if sort_field == 'purpose' and sort_dir == 'asc' %}desc{% else %}asc{% endif %}"
-                    hx-target="#datatable-body" hx-include="#consent_records-datatable" style="cursor: pointer;">
+                    hx-target="#datatable-body" hx-include="#consent_records-datatable">
                     {% trans "Purpose" %}
                     <span class="datatable-sort-icon">{% icon "chevron-up-outline" %}</span>
                 </th>
-                <th class="datatable-th datatable-th-sortable{% if sort_field == 'consent_date' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
+                <th class="cursor-pointer datatable-th datatable-th-sortable{% if sort_field == 'consent_date' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
                     hx-get="{% url 'gdpr:consent_records_list' %}?sort=consent_date&dir={% if sort_field == 'consent_date' and sort_dir == 'asc' %}desc{% else %}asc{% endif %}"
-                    hx-target="#datatable-body" hx-include="#consent_records-datatable" style="cursor: pointer;">
+                    hx-target="#datatable-body" hx-include="#consent_records-datatable">
                     {% trans "Consent Date" %}
                     <span class="datatable-sort-icon">{% icon "chevron-up-outline" %}</span>
                 </th>
-                <th class="datatable-th datatable-th-sortable{% if sort_field == 'withdrawal_date' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
+                <th class="cursor-pointer datatable-th datatable-th-sortable{% if sort_field == 'withdrawal_date' %} datatable-th-sorted{% if sort_dir == 'desc' %} datatable-th-sorted-desc{% endif %}{% endif %}"
                     hx-get="{% url 'gdpr:consent_records_list' %}?sort=withdrawal_date&dir={% if sort_field == 'withdrawal_date' and sort_dir == 'asc' %}desc{% else %}asc{% endif %}"
-                    hx-target="#datatable-body" hx-include="#consent_records-datatable" style="cursor: pointer;">
+                    hx-target="#datatable-body" hx-include="#consent_records-datatable">
                     {% trans "Withdrawal Date" %}
                     <span class="datatable-sort-icon">{% icon "chevron-up-outline" %}</span>
                 </th>
