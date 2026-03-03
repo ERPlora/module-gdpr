@@ -30,3 +30,17 @@ PERMISSIONS = [
 'gdpr.process_datarequest',
 'gdpr.manage_settings',
 ]
+
+ROLE_PERMISSIONS = {
+    "admin": ["*"],
+    "manager": [
+        "manage_consent",
+        "process_datarequest",
+        "view_consentrecord",
+        "view_datarequest",
+    ],
+    "employee": [
+        "view_consentrecord",
+        "view_datarequest",
+    ],
+}
