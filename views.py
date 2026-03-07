@@ -3,6 +3,8 @@ GDPR & Privacy Module Views
 """
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
+from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, render as django_render
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -114,6 +116,7 @@ def consent_records_list(request):
     }
 
 @login_required
+@htmx_view('gdpr/pages/consent_record_add.html', 'gdpr/partials/consent_record_add_content.html')
 def consent_record_add(request):
     hub_id = request.session.get('hub_id')
     if request.method == 'POST':
@@ -131,10 +134,13 @@ def consent_record_add(request):
         obj.consent_date = consent_date
         obj.withdrawal_date = withdrawal_date
         obj.save()
-        return _render_consent_records_list(request, hub_id)
-    return django_render(request, 'gdpr/partials/panel_consent_record_add.html', {})
+        response = HttpResponse(status=204)
+        response['HX-Redirect'] = reverse('gdpr:consent_records_list')
+        return response
+    return {}
 
 @login_required
+@htmx_view('gdpr/pages/consent_record_edit.html', 'gdpr/partials/consent_record_edit_content.html')
 def consent_record_edit(request, pk):
     hub_id = request.session.get('hub_id')
     obj = get_object_or_404(ConsentRecord, pk=pk, hub_id=hub_id, is_deleted=False)
@@ -147,7 +153,7 @@ def consent_record_edit(request, pk):
         obj.withdrawal_date = request.POST.get('withdrawal_date') or None
         obj.save()
         return _render_consent_records_list(request, hub_id)
-    return django_render(request, 'gdpr/partials/panel_consent_record_edit.html', {'obj': obj})
+    return {'obj': obj}
 
 @login_required
 @require_POST
@@ -252,6 +258,7 @@ def data_requests_list(request):
     }
 
 @login_required
+@htmx_view('gdpr/pages/data_request_add.html', 'gdpr/partials/data_request_add_content.html')
 def data_request_add(request):
     hub_id = request.session.get('hub_id')
     if request.method == 'POST':
@@ -270,9 +277,10 @@ def data_request_add(request):
         obj.notes = notes
         obj.save()
         return _render_data_requests_list(request, hub_id)
-    return django_render(request, 'gdpr/partials/panel_data_request_add.html', {})
+    return {}
 
 @login_required
+@htmx_view('gdpr/pages/data_request_edit.html', 'gdpr/partials/data_request_edit_content.html')
 def data_request_edit(request, pk):
     hub_id = request.session.get('hub_id')
     obj = get_object_or_404(DataRequest, pk=pk, hub_id=hub_id, is_deleted=False)
@@ -285,7 +293,7 @@ def data_request_edit(request, pk):
         obj.notes = request.POST.get('notes', '').strip()
         obj.save()
         return _render_data_requests_list(request, hub_id)
-    return django_render(request, 'gdpr/partials/panel_data_request_edit.html', {'obj': obj})
+    return {'obj': obj}
 
 @login_required
 @require_POST
