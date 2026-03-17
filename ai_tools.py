@@ -71,3 +71,37 @@ class CreateDataRequest(AssistantTool):
         from gdpr.models import DataRequest
         r = DataRequest.objects.create(subject_name=args['subject_name'], subject_email=args['subject_email'], request_type=args['request_type'], notes=args.get('notes', ''))
         return {"id": str(r.id), "created": True}
+
+
+@register_tool
+class UpdateDataRequest(AssistantTool):
+    name = "update_data_request"
+    description = "Update the status of a GDPR data request."
+    module_id = "gdpr"
+    required_permission = "gdpr.change_datarequest"
+    requires_confirmation = True
+    parameters = {
+        "type": "object",
+        "properties": {
+            "request_id": {"type": "string", "description": "Data request ID"},
+            "status": {"type": "string", "description": "New status (e.g. pending, in_progress, completed, rejected)"},
+            "notes": {"type": "string", "description": "Additional notes"},
+        },
+        "required": ["request_id", "status"],
+        "additionalProperties": False,
+    }
+
+    def execute(self, args, request):
+        from django.utils import timezone
+        from gdpr.models import DataRequest
+        try:
+            r = DataRequest.objects.get(id=args['request_id'])
+        except DataRequest.DoesNotExist:
+            return {"error": "Data request not found"}
+        r.status = args['status']
+        if args.get('notes') is not None:
+            r.notes = args['notes']
+        if args['status'] == 'completed' and not r.completed_at:
+            r.completed_at = timezone.now()
+        r.save()
+        return {"id": str(r.id), "status": r.status, "updated": True}
